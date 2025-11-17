@@ -17,6 +17,6 @@ export default function EmailConsulta() {
         {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
       </div>
     </StorySlide>
-    <div className="card-container">
+    </div>
   );
 }

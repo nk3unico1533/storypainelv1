@@ -11,6 +11,7 @@ export default function RgConsulta() {
   };
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta RG">
       <div className="flex flex-col items-center gap-4">
         <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite o RG" className="osint-input w-full max-w-md text-center" />
@@ -18,5 +19,6 @@ export default function RgConsulta() {
         {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
       </div>
     </StorySlide>
+    </div>
   );
 }

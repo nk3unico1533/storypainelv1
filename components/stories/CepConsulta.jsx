@@ -1,22 +1,49 @@
 "use client";
+
 import { useState } from "react";
-import StorySlide from "./StorySlide";
 
 export default function CepConsulta() {
-  const [value, setValue] = useState("");
-  const [res, setRes] = useState(null);
+  const [cep, setCep] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resultado, setResultado] = useState(null);
 
-  const consultar = () => setRes({ tipo: "cep", entrada: value, endereco: "Rua Exemplo, 123" });
+  const consultar = () => {
+    if (!cep) return;
+    setLoading(true);
+    setResultado(null);
+
+    setTimeout(() => {
+      setResultado({
+        rua: "Av. Paulista",
+        cidade: "São Paulo",
+        estado: "SP",
+      });
+      setLoading(false);
+    }, 1200);
+  };
 
   return (
-    <div className="card-container">
-    <StorySlide title="Consulta CEP">
-      <div className="flex flex-col items-center gap-4">
-        <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite o CEP" className="osint-input w-full max-w-md text-center" />
-        <button onClick={consultar} className="btn-primary w-48">Consultar</button>
-        {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
-      </div>
-    </StorySlide>
+    <div className="flex flex-col items-center h-full w-full px-6">
+      <h1 className="text-3xl font-bold mb-6 text-pink-400">Consulta CEP</h1>
+
+      <input
+        value={cep}
+        onChange={(e) => setCep(e.target.value)}
+        placeholder="Digite o CEP"
+        className="w-full max-w-md p-3 rounded bg-transparent border border-pink-400/40 text-white mb-4"
+      />
+
+      <button onClick={consultar} className="w-full max-w-md p-3 bg-pink-500 rounded">
+        {loading ? "Consultando..." : "Consultar"}
+      </button>
+
+      {resultado && (
+        <div className="mt-6 w-full max-w-md p-4 border border-pink-400/40 rounded bg-black/30">
+          <p><b>Rua:</b> {resultado.rua}</p>
+          <p><b>Cidade:</b> {resultado.cidade}</p>
+          <p><b>Estado:</b> {resultado.estado}</p>
+        </div>
+      )}
     </div>
   );
 }

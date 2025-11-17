@@ -1,43 +1,52 @@
 "use client";
+
 import { useState } from "react";
-import StorySlide from "./StorySlide";
 
 export default function CpfConsulta() {
-  const [value, setValue] = useState("");
-  const [res, setRes] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [cpf, setCpf] = useState("");
+  const [resultado, setResultado] = useState(null);
 
   const consultar = async () => {
-    setLoading(true);
-    setRes(null);
-    // mock, trocar para sua API
-    setTimeout(() => {
-      setRes({ tipo: "cpf", entrada: value, nome: "Fulano da Silva" });
-      setLoading(false);
-    }, 900);
+    if (!cpf.trim()) return;
+
+    try {
+      const res = await fetch(`/api/cpf?valor=${cpf}`);
+      const json = await res.json();
+      setResultado(json);
+    } catch (err) {
+      setResultado({ erro: "Falha ao consultar" });
+    }
   };
 
   return (
-    <div className="card-container">
-    <StorySlide title="Consulta CPF">
-      <div className="flex flex-col items-center gap-4">
+    <div className="w-full h-full flex items-center justify-center px-4">
+      <div className="w-full max-w-sm bg-[#111] border border-white/10 rounded-2xl p-6 shadow-xl">
+
+        <h1 className="text-center text-2xl font-bold mb-6">
+          Consulta CPF
+        </h1>
+
         <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          type="text"
+          value={cpf}
+          onChange={(e) => setCpf(e.target.value)}
           placeholder="Digite o CPF"
-          className="osint-input w-full max-w-md text-center"
+          className="w-full bg-black/40 text-white p-3 rounded-xl border border-white/10 text-center mb-3 focus:outline-none"
         />
-        <button onClick={consultar} className="btn-primary w-48">
-          {loading ? "Consultando..." : "Consultar"}
+
+        <button
+          onClick={consultar}
+          className="w-full bg-gradient-to-r from-blue-500 to-blue-700 py-3 rounded-xl text-white font-semibold active:scale-95 transition"
+        >
+          Consultar
         </button>
 
-        {res && (
-          <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">
-            {JSON.stringify(res, null, 2)}
+        {resultado && (
+          <pre className="bg-black/40 border border-white/10 rounded-xl p-4 text-sm mt-4 overflow-x-auto whitespace-pre-wrap">
+            {JSON.stringify(resultado, null, 2)}
           </pre>
         )}
       </div>
-    </StorySlide>
     </div>
   );
 }

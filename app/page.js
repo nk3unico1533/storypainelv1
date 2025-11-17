@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main className="w-full h-screen bg-black text-white overflow-hidden">
       <Swiper
-        direction="vertical"
+        direction="horizontal"
         pagination={{ clickable: true }}
         modules={[Pagination]}
         className="w-full h-full"

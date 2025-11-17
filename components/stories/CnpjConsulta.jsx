@@ -23,7 +23,7 @@ export default function CnpjConsulta() {
   };
 
   return (
-    <div className="flex flex-col items-center h-full w-full px-6">
+    <div className="story-card flex flex-col items-center justify-center px-6">
       <h1 className="text-3xl font-bold mb-6 text-green-400">Consulta CNPJ</h1>
 
       <input

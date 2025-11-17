@@ -1,47 +1,40 @@
-'use client';
-
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import StorySlide from "./StorySlide";
 
 export default function CnpjConsulta() {
-  const [cnpj, setCnpj] = useState('');
-  const [resultado, setResultado] = useState(null);
+  const [value, setValue] = useState("");
+  const [res, setRes] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const consultar = async () => {
-    try {
-      const res = await fetch(
-        `https://sua-api-aqui.com/cnpj/${cnpj}`
-      );
-
-      const data = await res.json();
-      setResultado(data);
-    } catch (e) {
-      setResultado({ erro: 'Falha ao consultar CNPJ' });
-    }
+    setLoading(true);
+    setRes(null);
+    setTimeout(() => {
+      setRes({ tipo: "cnpj", entrada: value, razao: "ACME Ltda" });
+      setLoading(false);
+    }, 900);
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <h2 className="text-white text-3xl font-bold">Consulta CNPJ</h2>
+    <StorySlide title="Consulta CNPJ">
+      <div className="flex flex-col items-center gap-4">
+        <input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Digite o CNPJ"
+          className="osint-input w-full max-w-md text-center"
+        />
+        <button onClick={consultar} className="btn-primary w-48">
+          {loading ? "Consultando..." : "Consultar"}
+        </button>
 
-      <input
-        className="bg-neutral-800 text-white px-4 py-3 rounded-xl w-64 text-center"
-        placeholder="Digite o CNPJ"
-        value={cnpj}
-        onChange={(e) => setCnpj(e.target.value)}
-      />
-
-      <button
-        onClick={consultar}
-        className="bg-blue-600 px-6 py-3 rounded-xl text-white font-semibold"
-      >
-        Consultar
-      </button>
-
-      {resultado && (
-        <pre className="text-white text-sm mt-4">
-          {JSON.stringify(resultado, null, 2)}
-        </pre>
-      )}
-    </div>
+        {res && (
+          <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">
+            {JSON.stringify(res, null, 2)}
+          </pre>
+        )}
+      </div>
+    </StorySlide>
   );
 }

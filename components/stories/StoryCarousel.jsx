@@ -1,23 +1,24 @@
 "use client";
 
-import StorySlide from "./StorySlide";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
-const slides = [
-  { id: 1, title: "Consulta CPF", type: "cpf" },
-  { id: 2, title: "Consulta CNPJ", type: "cnpj" },
-  { id: 3, title: "Consulta Nome", type: "nome" },
-];
-
-export default function StoryCarousel() {
+export default function StoryCarousel({ children }) {
   return (
-    <div className="w-full h-screen overflow-x-auto flex snap-x snap-mandatory no-scrollbar">
-      {slides.map((slide) => (
-        <StorySlide
-          key={slide.id}
-          title={slide.title}
-          type={slide.type}
-        />
-      ))}
+    <div className="w-full h-screen bg-black flex items-center justify-center">
+      <Swiper
+        modules={[Pagination]}
+        pagination={{ clickable: true }}
+        spaceBetween={50}
+        slidesPerView={1}
+        className="w-full h-full"
+      >
+        {children.map((child, i) => (
+          <SwiperSlide key={i}>{child}</SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }

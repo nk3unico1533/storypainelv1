@@ -1,22 +1,48 @@
 "use client";
+
 import { useState } from "react";
-import StorySlide from "./StorySlide";
 
 export default function PlacaConsulta() {
-  const [value, setValue] = useState("");
-  const [res, setRes] = useState(null);
+  const [placa, setPlaca] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [resultado, setResultado] = useState(null);
 
-  const consultar = () => setRes({ tipo: "placa", entrada: value, veiculo: "Modelo XYZ" });
+  const consultar = () => {
+    if (!placa) return;
+    setLoading(true);
+
+    setTimeout(() => {
+      setResultado({
+        modelo: "Honda Civic 2020",
+        cidade: "Curitiba",
+        cor: "Preto",
+      });
+      setLoading(false);
+    }, 1200);
+  };
 
   return (
-    <div className="card-container">
-    <StorySlide title="Consulta Placa">
-      <div className="flex flex-col items-center gap-4">
-        <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite a Placa" className="osint-input w-full max-w-md text-center" />
-        <button onClick={consultar} className="btn-primary w-48">Consultar</button>
-        {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
-      </div>
-    </StorySlide>
+    <div className="flex flex-col items-center h-full w-full px-6">
+      <h1 className="text-3xl font-bold mb-6 text-cyan-400">Consulta Placa</h1>
+
+      <input
+        value={placa}
+        onChange={(e) => setPlaca(e.target.value)}
+        placeholder="Digite a placa"
+        className="w-full max-w-md p-3 rounded bg-transparent border border-cyan-400/40 text-white mb-4"
+      />
+
+      <button onClick={consultar} className="w-full max-w-md p-3 bg-cyan-600 rounded">
+        {loading ? "Consultando..." : "Consultar"}
+      </button>
+
+      {resultado && (
+        <div className="mt-6 w-full max-w-md p-4 border border-cyan-400/40 rounded bg-black/30">
+          <p><b>Modelo:</b> {resultado.modelo}</p>
+          <p><b>Cidade:</b> {resultado.cidade}</p>
+          <p><b>Cor:</b> {resultado.cor}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,51 +2,50 @@
 
 import { useState } from "react";
 
-export default function CpfConsulta() {
-  const [cpf, setCpf] = useState("");
+export default function CnpjConsulta() {
+  const [cnpj, setCnpj] = useState("");
+  const [loading, setLoading] = useState(false);
   const [resultado, setResultado] = useState(null);
 
-  const consultar = async () => {
-    if (!cpf.trim()) return;
+  const consultar = () => {
+    setLoading(true);
+    setResultado(null);
 
-    try {
-      const res = await fetch(`/api/cpf?valor=${cpf}`);
-      const json = await res.json();
-      setResultado(json);
-    } catch (err) {
-      setResultado({ erro: "Falha ao consultar" });
-    }
+    setTimeout(() => {
+      setResultado({
+        empresa: "Tech Solutions LTDA",
+        abertura: "2015-02-13",
+        status: "Ativa",
+      });
+      setLoading(false);
+    }, 1200);
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center px-4">
-      <div className="w-full max-w-sm bg-[#111] border border-white/10 rounded-2xl p-6 shadow-xl">
+    <div className="flex flex-col items-center justify-center h-full px-6">
+      <h1 className="text-3xl font-bold mb-6">Consulta CNPJ</h1>
 
-        <h1 className="text-center text-2xl font-bold mb-6">
-          Consulta CPF
-        </h1>
+      <input
+        value={cnpj}
+        onChange={(e) => setCnpj(e.target.value)}
+        placeholder="Digite o CNPJ"
+        className="w-full max-w-md p-3 rounded bg-zinc-900 border border-zinc-700 mb-4"
+      />
 
-        <input
-          type="text"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          placeholder="Digite o CPF"
-          className="w-full bg-black/40 text-white p-3 rounded-xl border border-white/10 text-center mb-3 focus:outline-none"
-        />
+      <button
+        onClick={consultar}
+        className="w-full max-w-md p-3 bg-green-600 rounded font-semibold"
+      >
+        {loading ? "Consultando..." : "Consultar"}
+      </button>
 
-        <button
-          onClick={consultar}
-          className="w-full bg-gradient-to-r from-blue-500 to-blue-700 py-3 rounded-xl text-white font-semibold active:scale-95 transition"
-        >
-          Consultar
-        </button>
-
-        {resultado && (
-          <pre className="bg-black/40 border border-white/10 rounded-xl p-4 text-sm mt-4 overflow-x-auto whitespace-pre-wrap">
-            {JSON.stringify(resultado, null, 2)}
-          </pre>
-        )}
-      </div>
+      {resultado && (
+        <div className="mt-6 w-full max-w-md p-4 bg-zinc-900 border border-zinc-700 rounded">
+          <p><b>Empresa:</b> {resultado.empresa}</p>
+          <p><b>Abertura:</b> {resultado.abertura}</p>
+          <p><b>Status:</b> {resultado.status}</p>
+        </div>
+      )}
     </div>
   );
 }

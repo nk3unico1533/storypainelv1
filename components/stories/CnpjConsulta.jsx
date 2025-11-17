@@ -1,42 +1,49 @@
 "use client";
+
 import { useState } from "react";
-import StorySlide from "./StorySlide";
 
 export default function CnpjConsulta() {
-  const [value, setValue] = useState("");
-  const [res, setRes] = useState(null);
+  const [cnpj, setCnpj] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resultado, setResultado] = useState(null);
 
-  const consultar = async () => {
+  const consultar = () => {
+    if (!cnpj) return;
     setLoading(true);
-    setRes(null);
+    setResultado(null);
+
     setTimeout(() => {
-      setRes({ tipo: "cnpj", entrada: value, razao: "ACME Ltda" });
+      setResultado({
+        empresa: "Tech Solutions LTDA",
+        abertura: "2012",
+        situacao: "Ativa",
+      });
       setLoading(false);
-    }, 900);
+    }, 1200);
   };
 
   return (
-    <div className="card-container">
-    <StorySlide title="Consulta CNPJ">
-      <div className="flex flex-col items-center gap-4">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Digite o CNPJ"
-          className="osint-input w-full max-w-md text-center"
-        />
-        <button onClick={consultar} className="btn-primary w-48">
-          {loading ? "Consultando..." : "Consultar"}
-        </button>
+    <div className="flex flex-col items-center h-full w-full px-6">
+      <h1 className="text-3xl font-bold mb-6 text-green-400">Consulta CNPJ</h1>
 
-        {res && (
-          <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">
-            {JSON.stringify(res, null, 2)}
-          </pre>
-        )}
-      </div>
-    </StorySlide>
+      <input
+        value={cnpj}
+        onChange={(e) => setCnpj(e.target.value)}
+        placeholder="Digite o CNPJ"
+        className="w-full max-w-md p-3 rounded bg-transparent border border-green-400/40 text-white mb-4"
+      />
+
+      <button onClick={consultar} className="w-full max-w-md p-3 bg-green-600 rounded">
+        {loading ? "Consultando..." : "Consultar"}
+      </button>
+
+      {resultado && (
+        <div className="mt-6 w-full max-w-md p-4 border border-green-400/40 rounded bg-black/30">
+          <p><b>Empresa:</b> {resultado.empresa}</p>
+          <p><b>Abertura:</b> {resultado.abertura}</p>
+          <p><b>Situação:</b> {resultado.situacao}</p>
+        </div>
+      )}
     </div>
   );
 }

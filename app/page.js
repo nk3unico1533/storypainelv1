@@ -21,10 +21,10 @@ import CepConsulta from "@/components/stories/CepConsulta";
 export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) router.replace("/login");
-  }, [router]);
+  //useEffect(() => {
+    //const token = localStorage.getItem("token");
+    //if (!token) router.replace("/login");
+  //}, [router]);
 
   return (
     <main className="w-full h-screen bg-black text-white overflow-hidden">

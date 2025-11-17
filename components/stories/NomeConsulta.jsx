@@ -9,6 +9,7 @@ export default function NomeConsulta() {
   const consultar = () => setRes({ tipo: "nome", entrada: value, resultados: [{ nome: value, idade: 30 }] });
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta Nome">
       <div className="flex flex-col items-center gap-4">
         <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite o Nome" className="osint-input w-full max-w-md text-center" />
@@ -16,5 +17,6 @@ export default function NomeConsulta() {
         {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
       </div>
     </StorySlide>
+    </div>
   );
 }

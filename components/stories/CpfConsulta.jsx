@@ -18,6 +18,7 @@ export default function CpfConsulta() {
   };
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta CPF">
       <div className="flex flex-col items-center gap-4">
         <input
@@ -37,5 +38,6 @@ export default function CpfConsulta() {
         )}
       </div>
     </StorySlide>
+    </div>
   );
 }

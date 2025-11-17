@@ -9,6 +9,7 @@ export default function TelefoneConsulta() {
   const consultar = () => setRes({ tipo: "telefone", entrada: value, owner: "Contato Exemplo" });
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta Telefone">
       <div className="flex flex-col items-center gap-4">
         <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite o Telefone" className="osint-input w-full max-w-md text-center" />
@@ -16,5 +17,6 @@ export default function TelefoneConsulta() {
         {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
       </div>
     </StorySlide>
+    </div>
   );
 }

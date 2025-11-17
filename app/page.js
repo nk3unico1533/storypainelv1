@@ -34,7 +34,6 @@ export default function Home() {
         modules={[Pagination]}
         className="w-full h-full"
       >
-        <SwiperSlide><CpfConsulta /></SwiperSlide>
 
       </Swiper>
     </main>

@@ -1,24 +1,41 @@
 "use client";
-
 import { useState } from "react";
+import StorySlide from "./StorySlide";
 
 export default function CpfConsulta() {
-  const [cpf, setCpf] = useState("");
+  const [value, setValue] = useState("");
+  const [res, setRes] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const consultar = async () => {
+    setLoading(true);
+    setRes(null);
+    // mock, trocar para sua API
+    setTimeout(() => {
+      setRes({ tipo: "cpf", entrada: value, nome: "Fulano da Silva" });
+      setLoading(false);
+    }, 900);
+  };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-black text-white p-6">
-      <h1 className="text-4xl font-bold mb-4">Consulta CPF</h1>
+    <StorySlide title="Consulta CPF">
+      <div className="flex flex-col items-center gap-4">
+        <input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Digite o CPF"
+          className="osint-input w-full max-w-md text-center"
+        />
+        <button onClick={consultar} className="btn-primary w-48">
+          {loading ? "Consultando..." : "Consultar"}
+        </button>
 
-      <input
-        value={cpf}
-        onChange={(e) => setCpf(e.target.value)}
-        placeholder="Digite o CPF"
-        className="w-64 px-4 py-3 rounded-lg bg-neutral-800 text-white mb-4"
-      />
-
-      <button className="w-64 py-3 bg-blue-600 rounded-lg text-white font-bold">
-        Consultar
-      </button>
-    </div>
+        {res && (
+          <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">
+            {JSON.stringify(res, null, 2)}
+          </pre>
+        )}
+      </div>
+    </StorySlide>
   );
 }

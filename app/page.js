@@ -29,11 +29,14 @@ export default function Home() {
   return (
     <main className="w-full h-screen bg-black text-white overflow-hidden">
       <Swiper
-        direction="horizontal"
-        pagination={{ clickable: true }}
-        modules={[Pagination]}
-        className="w-full h-full"
-      >
+  direction="horizontal"
+  pagination={{ clickable: true }}
+  spaceBetween={40}
+  slidesPerView={1.1} // mostra parte do próximo slide
+  centeredSlides={true} // deixa centralizado tipo story
+  modules={[Pagination]}
+  className="w-full h-full px-4"
+>
         <SwiperSlide><CpfConsulta /></SwiperSlide>
         <SwiperSlide><CnpjConsulta /></SwiperSlide>
         <SwiperSlide><RgConsulta /></SwiperSlide>

@@ -111,4 +111,47 @@
   margin: auto;
 }
 
+.story-fade {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 80px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.fade-left {
+  left: 0;
+  background: linear-gradient(to right, black, transparent);
+}
+
+.fade-right {
+  right: 0;
+  background: linear-gradient(to left, black, transparent);
+}
+
+.story-card {
+  width: 100%;
+  max-width: 90%;
+  margin: auto;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 20px;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(6px);
+  border: 2px solid transparent;
+
+  /* glow RGB animado */
+  box-shadow: 0 0 25px rgba(255,0,255,0.4),
+              0 0 40px rgba(0,200,255,0.2),
+              0 0 60px rgba(0,255,150,0.2);
+  animation: rgb-glow 5s linear infinite;
+}
+
+@keyframes rgb-glow {
+  0% { box-shadow: 0 0 25px #ff00ff, 0 0 40px #00eaff; }
+  33% { box-shadow: 0 0 25px #00eaff, 0 0 40px #00ff6a; }
+  66% { box-shadow: 0 0 25px #00ff6a, 0 0 40px #ff00ff; }
+  100% { box-shadow: 0 0 25px #ff00ff, 0 0 40px #00eaff; }
+}
 

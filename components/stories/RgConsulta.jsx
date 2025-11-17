@@ -23,7 +23,7 @@ export default function RgConsulta() {
   };
 
   return (
-    <div className="flex flex-col items-center h-full w-full px-6">
+    <div className="story-card flex flex-col items-center justify-center px-6">
       <h1 className="text-3xl font-bold mb-6 text-blue-400">Consulta RG</h1>
 
       <input

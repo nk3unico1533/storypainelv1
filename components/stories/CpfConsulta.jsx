@@ -7,13 +7,11 @@ export default function CpfConsulta() {
   const [loading, setLoading] = useState(false);
   const [resultado, setResultado] = useState(null);
 
-  const consultar = async () => {
+  const consultar = () => {
     if (!cpf) return;
-
     setLoading(true);
     setResultado(null);
 
-    // simulação
     setTimeout(() => {
       setResultado({
         nome: "João da Silva",
@@ -25,14 +23,14 @@ export default function CpfConsulta() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full px-6">
+    <div className="flex flex-col items-center justify-center h-full w-full px-6">
       <h1 className="text-3xl font-bold mb-6">Consulta CPF</h1>
 
       <input
         value={cpf}
         onChange={(e) => setCpf(e.target.value)}
         placeholder="Digite o CPF"
-        className="w-full max-w-md p-3 rounded bg-zinc-900 border border-zinc-700 mb-4"
+        className="w-full max-w-md p-3 rounded bg-transparent border border-white/20 text-white mb-4"
       />
 
       <button
@@ -43,7 +41,7 @@ export default function CpfConsulta() {
       </button>
 
       {resultado && (
-        <div className="mt-6 w-full max-w-md p-4 bg-zinc-900 border border-zinc-700 rounded">
+        <div className="mt-6 w-full max-w-md p-4 bg-transparent border border-white/20 rounded">
           <p><b>Nome:</b> {resultado.nome}</p>
           <p><b>Nascimento:</b> {resultado.nascimento}</p>
           <p><b>Situação:</b> {resultado.situacao}</p>

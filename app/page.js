@@ -35,13 +35,7 @@ export default function Home() {
         className="w-full h-full"
       >
         <SwiperSlide><CpfConsulta /></SwiperSlide>
-        <SwiperSlide><CnpjConsulta /></SwiperSlide>
-        <SwiperSlide><RgConsulta /></SwiperSlide>
-        <SwiperSlide><TelefoneConsulta /></SwiperSlide>
-        <SwiperSlide><PlacaConsulta /></SwiperSlide>
-        <SwiperSlide><NomeConsulta /></SwiperSlide>
-        <SwiperSlide><EmailConsulta /></SwiperSlide>
-        <SwiperSlide><CepConsulta /></SwiperSlide>
+
       </Swiper>
     </main>
   );

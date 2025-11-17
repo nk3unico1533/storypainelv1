@@ -17,6 +17,7 @@ export default function CnpjConsulta() {
   };
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta CNPJ">
       <div className="flex flex-col items-center gap-4">
         <input
@@ -36,5 +37,6 @@ export default function CnpjConsulta() {
         )}
       </div>
     </StorySlide>
+    </div>
   );
 }

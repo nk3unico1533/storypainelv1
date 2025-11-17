@@ -23,7 +23,7 @@ export default function TelefoneConsulta() {
   };
 
   return (
-    <div className="flex flex-col items-center h-full w-full px-6">
+    <div className="story-card flex flex-col items-center justify-center px-6">
       <h1 className="text-3xl font-bold mb-6 text-purple-400">Consulta Telefone</h1>
 
       <input

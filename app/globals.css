@@ -81,3 +81,18 @@
   /* larger cards on desktop */
   .slide-inner .card-inner { padding: 32px; }
 }
+.slide-card {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.card-container {
+  width: 85%;
+  max-width: 380px;
+  background: #111;
+  border-radius: 20px;
+  border: 1px solid #555;
+  padding: 25px;
+  margin: auto;
+}

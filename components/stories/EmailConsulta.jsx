@@ -9,6 +9,7 @@ export default function EmailConsulta() {
   const consultar = () => setRes({ tipo: "email", entrada: value, gravatar: "hash" });
 
   return (
+    <div className="card-container">
     <StorySlide title="Consulta Email">
       <div className="flex flex-col items-center gap-4">
         <input value={value} onChange={(e)=>setValue(e.target.value)} placeholder="Digite o Email" className="osint-input w-full max-w-md text-center" />
@@ -16,5 +17,6 @@ export default function EmailConsulta() {
         {res && <pre className="mt-6 bg-black/40 p-4 rounded-lg w-full max-w-md">{JSON.stringify(res,null,2)}</pre>}
       </div>
     </StorySlide>
+    <div className="card-container">
   );
 }
